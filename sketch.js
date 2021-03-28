@@ -8,7 +8,7 @@ let cam;
 
 function preload(){
   // load the shader
-  camShader = loadShader('effect.vert', 'effect.frag');
+  camShader = loadShader('effect.vert', 'effect2.frag');
 }
 
 function setup() {
@@ -33,14 +33,16 @@ function draw() {
   camShader.setUniform('tex0', cam);
 
   // also send the size of 1 texel on the screen
-  camShader.setUniform('texelSize', [1.0/width, 1.0/height]);
-  camShader.setUniform('u_time', millis()/1000.0);
-  camShader.setUniform('u_duration', 8.0);
+  camShader.setUniform('texelSize', [1.0/windowWidth, 1.0/windowHeight]);
+  // camShader.setUniform('u_time', millis()/1000.0);
+  // camShader.setUniform('u_duration', 8.0);
+  camShader.setUniform('time', millis()/1000.0)
+  camShader.setUniform('resolution', [windowWidth, windowHeight])
 
   // rect gives us some geometry on the screen
-  rect(0,0,width, height);
+  rect(0,0,windowWidth, windowHeight);
 }
 
-function windowResized(){
-  resizeCanvas(windowWidth, windowHeight);
-}
+// function windowResized(){
+//   resizeCanvas(windowWidth, windowHeight);
+// }
